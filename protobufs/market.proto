@@ -1,0 +1,31 @@
+// Protobuf file for a Market microservice
+
+syntax = "proto3";
+
+enum ResponseType {
+    OK = 0;	// Item was added successfully
+    NO = 1;	// Item could not be added
+}
+
+message AddRequest {
+    int32 item_id = 1;
+    int32 cart_id = 2;
+}
+
+message AddResponse {
+    int32 response_token = 1;
+}
+
+message CartRequest {
+    int32 cart_id = 1;
+}
+
+message CartResponse {
+    int32 item_amt = 1;		// Metadata can be useful for parsing
+    repeated int32 item_id = 2; // Cart contents
+}
+
+service Market {
+    rpc AddItem (AddRequest) returns (AddResponse);
+    rpc RequestCart (CartRequest) returns (CartResponse);
+}

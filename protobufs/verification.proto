@@ -1,0 +1,21 @@
+// Protobuf file for a Verification microservice
+
+syntax = "proto3";
+
+enum UserCategory {
+    RESERVED = 0;	// removes possible inconsistency
+    CLIENT = 1;
+    ADMIN = 2;
+}
+
+message VerificationRequest {
+    int32 user_token = 1;
+}
+
+message VerificationResponse {
+    UserCategory category = 1;
+}
+
+service Verifications {
+    rpc Verify (VerificationRequest) returns (VerificationResponse);
+}
